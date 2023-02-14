@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/addDataFragment">
-
     <fragment
         android:id="@+id/addDataFragment"
         android:name="com.o7solutions.sharedpreferences.AddDataFragment"
@@ -16,6 +15,7 @@
             app:popUpTo="@id/showDataFragment"
             app:popUpToInclusive="true"/>
     </fragment>
+
     <fragment
         android:id="@+id/showDataFragment"
         android:name="com.o7solutions.sharedpreferences.ShowDataFragment"

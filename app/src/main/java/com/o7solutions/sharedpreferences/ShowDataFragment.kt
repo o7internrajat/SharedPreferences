@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import com.o7solutions.sharedpreferences.databinding.FragmentShowDataBinding
@@ -22,6 +23,7 @@ private const val ARG_PARAM2 = "param2"
 class ShowDataFragment : Fragment() {
     lateinit var sharedPreferences: SharedPreferences
     lateinit var binding: FragmentShowDataBinding
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -32,22 +34,22 @@ class ShowDataFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
-       val binding = FragmentShowDataBinding.inflate(layoutInflater)
+        val binding = FragmentShowDataBinding.inflate(layoutInflater)
         val preferences = context?.getSharedPreferences("pref", Context.MODE_PRIVATE)
-//        val name = preferences?.getString("NAME",binding.tvName.text.toString())
-//        val email = preferences?.getString("EMAIL",binding.tvEmail.text.toString())
-//        val phone = preferences?.getString("NUMBER", binding.tvPhone.text.toString())
         val show = Gson()
         val json: String? = preferences?.getString("MyObject", "")
-        val obj: UserModel = show.fromJson(json, UserModel::class.java)
-        binding.tvName.text=obj.name
-        binding.tvEmail.text = obj.email
-        binding.tvPhone.text = obj.phone
+        if (json?.isNotEmpty() == true) {
+            val obj: UserModel = show.fromJson(json, UserModel::class.java)
+            binding.tvName.text = obj.name
+            binding.tvEmail.text = obj.email
+            binding.tvPhone.text = obj.phone
+        }
         return binding.root
     }
     companion object {

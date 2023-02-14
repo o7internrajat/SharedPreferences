@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
 import com.o7solutions.sharedpreferences.databinding.FragmentAddDataBinding
@@ -45,7 +47,7 @@ class AddDataFragment : Fragment() {
     ): View? {
         val binding = FragmentAddDataBinding.inflate(layoutInflater)
         val sharedPreferences = context?.getSharedPreferences("pref", MODE_PRIVATE)
-            binding.btnSave.setOnClickListener{
+            binding.btnSave.setOnClickListener {
                 if(binding.etName.text.isEmpty()){
                     binding.etName.error="Enter Your Name"
                 }else if(binding.etEmail.text.isEmpty()){
@@ -62,9 +64,9 @@ class AddDataFragment : Fragment() {
                     val user: String = gson.toJson(userModel)
                     editor?.putString("MyObject", user)
                     editor?.apply()
-                    findNavController().navigate(R.id.action_addDataFragment_to_showDataFragment)
+                findNavController().navigate(R.id.action_addDataFragment_to_showDataFragment)
                 }
-        }
+            }
         return binding.root
     }
     companion object {
